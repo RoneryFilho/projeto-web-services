@@ -60,7 +60,7 @@ public class Order implements Serializable{
 		return client;
 	}
 	
-	public void setOrderStatus(OrderStatus orderStatus) {
+	private void setOrderStatus(OrderStatus orderStatus) {
 		if(orderStatus != null) {
 			this.orderStatus = orderStatus.getCode();
 		}
