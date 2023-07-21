@@ -3,7 +3,6 @@ package com.webservices.course.entities.pk;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.webservices.course.entities.Order;
 import com.webservices.course.entities.Product;
 
