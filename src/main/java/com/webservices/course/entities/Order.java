@@ -89,6 +89,18 @@ public class Order implements Serializable{
 		return this.payment;
 	}
 	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setMoment(Instant moment) {
+		this.moment = moment;
+	}
+
+	public void setClient(User client) {
+		this.client = client;
+	}
+
 	public Double getTotal() {
 		double total = 0.0;
 		
