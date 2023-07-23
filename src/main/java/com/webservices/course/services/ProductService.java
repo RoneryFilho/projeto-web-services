@@ -1,6 +1,5 @@
 package com.webservices.course.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +30,9 @@ public class ProductService {
 		Optional<Product> obj = repository.findById(id);
 		return obj.get();
 	}
-	public Product insert (Product product, ArrayList<Category> categories ) {
+	public Product insert (Product product,Category cat) {
 		Product prod = new Product(null, product.getName(), product.getDescription(), product.getPrice(), product.getImgUrl());
-		for(Category cat : categories) {
-			prod.getCategories().add(cat);
-		}
+		prod.getCategories().add(cat);
 		return repository.save(prod);
 	}
 	
@@ -52,10 +49,10 @@ public class ProductService {
 	        }
 	}
 	
-	public Product update(Long id, Product product, ArrayList<Category> categories) {
+	public Product update(Long id, Product product, Category cat) {
 		try {
 		Product entity = repository.getReferenceById(id);
-		updateData(entity, product, categories);
+		updateData(entity, product, cat);
 		return repository.save(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
@@ -64,13 +61,11 @@ public class ProductService {
 	
 	
 
-	private void updateData(Product entity, Product product, ArrayList<Category> categories) {
+	private void updateData(Product entity, Product product,Category cat) {
 		entity.setName(product.getName());
 		entity.setDescription(product.getDescription());
 		entity.setPrice(product.getPrice());
-		for (Category cat : categories) {
-			entity.getCategories().add(cat);
-		}
+		entity.getCategories().add(cat);
 		
 	}
 }

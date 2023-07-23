@@ -1,7 +1,6 @@
 package com.webservices.course.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,8 @@ public class ProductResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Product> insert (@RequestBody Product product, @RequestBody ArrayList<Category> categories) {
-		service.insert(product, categories);
+	public ResponseEntity<Product> insert (@RequestBody Product product, @RequestBody Category cat) {
+		service.insert(product, cat);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
 		return ResponseEntity.created(uri).body(product);
 	}
@@ -53,8 +52,8 @@ public class ProductResource {
 	}
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Product> update(@PathVariable Long id,@RequestBody Product product, @RequestBody ArrayList<Category> categories){
-		product = service.update(id, product, categories);
+	public ResponseEntity<Product> update(@PathVariable Long id,@RequestBody Product product, @RequestBody Category cat){
+		product = service.update(id, product, cat);
 		return ResponseEntity.ok().body(product);
 	}
 }
