@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.webservices.course.entities.Category;
 import com.webservices.course.entities.Product;
+import com.webservices.course.entities.wrappers.ProductCategoryWrapper;
 import com.webservices.course.services.ProductService;
 
 @RestController
@@ -39,8 +40,11 @@ public class ProductResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Product> insert (@RequestBody Product product, @RequestBody Category cat) {
-		service.insert(product, cat);
+	public ResponseEntity<Product> insert (@RequestBody ProductCategoryWrapper wrapper) {
+		Product product = wrapper.getProduct();
+	    Category category = wrapper.getCategory();
+
+	    service.insert(product, category);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
 		return ResponseEntity.created(uri).body(product);
 	}
